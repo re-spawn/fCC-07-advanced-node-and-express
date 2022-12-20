@@ -32,7 +32,7 @@ module.exports = function (app, myDataBase) {
     clientSecret: process.env.GITHUB_CLIENT_SECRET,
     callbackURL: 'https://fcc-07-advanced-node-and-express.respawn709.repl.co/auth/github/callback'
     },
-    function (accessToken, refreshToken, profile, cb) => {
+    function (accessToken, refreshToken, profile, cb) {
       console.log(profile);
       myDataBase.findOneAndUpdate(
 	{ id: profile.id },
