@@ -32,8 +32,33 @@ module.exports = function (app, myDataBase) {
     clientSecret: process.env.GITHUB_CLIENT_SECRET,
     callbackURL: 'https://fcc-07-advanced-node-and-express.respawn709.repl.co/auth/github/callback'
     }, (accessToken, refreshToken, profile, callback) => {
-      console.log("GitHub Profile:");
       console.log(profile);
+      myDataBase.findOneAndUpdate(
+	{ id: profile.id },
+        {
+	  $setOnInsert: {
+	    id: profile.id,
+	    username: profile.username,
+	    name: profile.displayName || 'John Doe',
+	    photo: profile.photos[0].value || '',
+	    email: Array.isArray(profile.emails)
+              ? profile.emails[0].value
+              : 'No public email',
+	    create_on: new Date(),
+	    provider: profile.provider || ''
+	  },
+	  $set: {
+	    last_login: new Date()
+	  },
+	  $inc: {
+	    login_count: 1
+	  }
+	},
+	{ upsert: true, new: true },
+	(err, doc) => {
+	  return callback(null, doc.value);
+	}
+      );
     }
   ));
 
