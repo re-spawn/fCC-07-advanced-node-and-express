@@ -1,7 +1,9 @@
+require('dotenv').config();
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const bcrypt = require('bcrypt');
 const { ObjectID } = require('mongodb');
+const GitHubStrategy = require('passport-github').Strategy;
 
 module.exports = function (app, myDataBase) {
 
@@ -24,5 +26,15 @@ module.exports = function (app, myDataBase) {
       return done(null, user);
     });
   }));
+
+  passport.use(new GitHubStrategy({
+    clientID: process.env.GITHUB_CLIENT_ID,
+    clientSecret: process.env.GITHUB_CLIENT_SECRET,
+    callbackURL: 'https://fcc-07-advanced-node-and-express.respawn709.repl.co/auth/github/callback'
+    }, (accessToken, refreshToken, profile, callback) => {
+      console.log("GitHub Profile:");
+      console.log(profile);
+    }
+  ));
 
 }
