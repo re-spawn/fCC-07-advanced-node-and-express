@@ -5,7 +5,7 @@
   "name": "fcc-advanced-node-and-express",
   "author": "http://github.com/JosephLivengood",
   "version": "0.0.1",
-  "description": "What am I about?",
+  "description": "Advanced Node and Express, part of freeCodeCamp's curriculum",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -28,7 +28,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://glitch.com/#!/project/welcome-project"
+    "url": "https://github.com/re-spawn/fCC-07-advanced-node-and-express"
   },
   "keywords": [
     "node",
