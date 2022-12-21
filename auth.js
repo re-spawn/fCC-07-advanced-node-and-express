@@ -33,7 +33,7 @@ module.exports = function (app, myDataBase) {
     callbackURL: 'https://fcc-07-advanced-node-and-express.respawn709.repl.co/auth/github/callback'
     },
     function (accessToken, refreshToken, profile, cb) {
-      console.log(profile);
+      // console.log(profile);
       myDataBase.findOneAndUpdate(
 	{ id: profile.id },
         {
