@@ -37,6 +37,8 @@ myDB(async client => {
   auth(app, myDataBase);
   io.on('connection', socket => {
     console.log('A user has connected');
+    ++currentUsers;
+    io.emit('user count', currentUsers);
   });
 }).catch(e => {
   app.route('/').get((req, res) => {
@@ -49,6 +51,7 @@ myDB(async client => {
 
 const PORT = process.env.PORT || 3000;
 // app.listen(PORT, () => {
+let currentUsers = 0;
 http.listen(PORT, () => {
   console.log('Listening on port ' + PORT);
 });
