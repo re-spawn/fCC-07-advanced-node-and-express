@@ -3,7 +3,6 @@ $(document).ready(function () {
   let socket = io();
   socket.on('user count', function(data) {
     console.log(data);
-    console.log('user ' + socket.request.user.username + ' connected');
   });
   // Form submittion with new message in field with id 'm'
   $('form').submit(function () {
